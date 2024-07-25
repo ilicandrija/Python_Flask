@@ -1,0 +1,32 @@
+.text-center{
+	text-align: center;
+}
+
+.alert-info {
+			background-color: white;
+			
+			border: 2px solid seagreen;
+			width:930px;
+			height: 48px;
+			font-size: 13px;
+			text-align: center;
+			margin-bottom: 0px !important;
+		}
+
+.alert-danger {
+			background-color: white;
+			
+			border: 2px solid indianred;
+			width:930px;
+			height: 48px;
+			font-size: 13px;
+			text-align: center;
+			margin-bottom: 0px !important;
+		}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+  }
+  
+ 

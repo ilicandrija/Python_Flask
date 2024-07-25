@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/user.css')}}">
+    <div class="container d-flex justify-content-center align-items-center text-success">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+               {% for category, message in messages %}
+                 {% if category == 'error' %}
+                   <div id="flash-messages" class="alert alert-danger text-center text-danger rounded">
+                         <p>{{ message }}</p>
+                   </div>
+                 {% else %}
+                    <div id="flash-messages" class="alert alert-info text-center text-success rounded">
+                      <p>{{ message }}</p>
+                   </div>
+                 {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </div>
+    <style>
+    .row{
+      font-family: courier;
+    }
+    </style>
+
+    <div class="row mt-4">
+  <div class="col-md-6 mx-auto">
+    <div class="card border-0 rounded">
+      <div class="card-body text-center">
+        <h4 class="card-title">Statistika</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="text-center">
+              <h5 class="card-text text-secondary mb-1">Ukupno Obaveza</h5>
+              <p class="card-text font-weight-bold">{{ num_todos }}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <h5 class="card-text text-success mb-1">Završene obaveze</h5>
+              <p class="card-text font-weight-bold">{{ num_checked }}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <h5 class="card-text text-danger mb-1">Nezavršene obaveze</h5>
+              <p class="card-text font-weight-bold">{{ num_not_checked }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="row mt-4">
+  <div class="col-md-6 mx-auto">
+    <ul class="list-group">
+      {% for todo in user.todos %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="done" {% if todo.done %}checked{% endif %} disabled onchange="this.form.submit()" />
+            <label class="form-check-label {% if todo.done %}text-muted{% endif %}" {% if todo.done %}style="text-decoration: line-through;"{% endif %}>{{ todo['task'] }}</label>
+
+          </div>
+          <div class="btn-group">
+  <a href="{{ url_for('check', user=user.id, todo_id=todo.id) }}" class="btn btn-success btn-sm">
+    <i class="fa-solid fa-check"></i>
+  </a>
+  <a href="{{ url_for('edit', user=user.id, todo_id=todo.id) }}" class="btn btn-primary btn-sm">
+    <i class="fa-solid fa-pen-to-square"></i>
+  </a>
+  <a href="{{ url_for('delete', user=user.id, todo_id=todo.id) }}" class="btn btn-danger btn-sm confirmation-btn">
+    <i class="fa-solid fa-trash"></i>
+  </a>
+</div>
+
+        </li>
+      {% endfor %}
+    </ul>
+    <form action="{{ url_for('add') }}" method="POST" class="mt-4">
+      <div class="input-group">
+        <input type="text" name="todo" class="form-control" />
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Dodaj Stavku</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  var flashMessages = document.getElementById('flash-messages');
+  if (flashMessages) {
+    setTimeout(function() {
+      flashMessages.remove();
+    }, 3000);
+  }
+</script>
+{%endblock%}

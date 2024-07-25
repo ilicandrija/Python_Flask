@@ -1,0 +1,37 @@
+body {
+  background-image: url("/static/images/pozadina.jpg");
+  background-size: cover;
+}
+
+.trenutni {
+  color: white !important;
+  text-decoration: none;
+}
+
+.trenutni:after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 120%;
+  margin-left: -10%;
+  background-color: white;
+}
+
+.navbar {
+  background-color: #067af8 !important; /* Change this to the color you want */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.navbar-nav > li > a {
+  padding-bottom: 0.5px;
+  padding-top: 1px;
+}
+
+.navbar-nav {
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 18px;
+    }
+
+
+
+

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 style="color:white">Edituj Stavku</h1>
+  <form method="post">
+    <div class="form-group">
+      <label style="color:white" for="todo">Stavka:</label>
+      <input type="text" class="form-control" id="todo" name="todo" value="{{ todo.task }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+{% endblock %}
